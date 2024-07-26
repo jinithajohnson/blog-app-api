@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const cors = require("cors")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
-const usermodel = require("./models/blog")
+const {usermodel} = require("./models/blog")
 let app = express()
 app.use(cors())
 app.use(express.json())
@@ -14,7 +14,6 @@ app.post("/signup", async (req, res) => {
     let hashedPassword = bcrypt.hashSync(req.body.password,10)
     console.log(hashedPassword)
     req.body.password=hashedPassword
-
 
    usermodel.find({ email:req.body.email }).then(
     (items)=>{
